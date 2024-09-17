@@ -2,63 +2,60 @@ import React from "react";
 import hope from "./images/hope.jpg";
 import jedi from "./images/jedi.jpg";
 import sith from "./images/sith.jpg";
+import poster from "./images/poster.jpg";
 import menace from "./images/menace.jpg";
 import clones from "./images/clones.jpg";
 import strikes from "./images/strikes.jpg";
+import { useNavigate } from "react-router-dom";
 
 const Film = ({ data }) => {
+  const navigate = useNavigate();
   const filmImages = [
     { url: hope, title: "A New Hope" },
     { url: strikes, title: "The Empire Strikes Back" },
-    { url: jedi,  title: "Return of the Jedi" },
+    { url: jedi, title: "Return of the Jedi" },
     { url: menace, title: "The Phantom Menace" },
-    { url: clones, title: "Attack of the Clones"},
-    { url: sith, title: "Revenge of the Sith"}
+    { url: clones, title: "Attack of the Clones" },
+    { url: sith, title: "Revenge of the Sith" },
   ];
-  
+
+  const handleImageClick = (filmDetails) => {
+    navigate(`/film/${filmDetails.title}`, {
+      state: filmDetails
+    })
+  }
+
   return (
-    <div className="flex flex-wrap w-full h-full">
+    <div className="px-3 py-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
       {data?.allFilms?.films?.map((value, index) => {
+        const image = filmImages.find((film) => film.title === value.title);
         return (
           <div
             key={index}
-            className="h-[300px] w-[120px] sm:w-[160px] md:w-[200px] lg:w-[240px] 
-                inline-block cursor-pointer relative p-1 bg-slate-500 mx-2 mt-5"
+            className="cursor-pointer relative p-1 mt-3"
+            onClick={() => handleImageClick({...value, ...image})}
           >
-            <h2 className="text-xl font-bold text-wrap text-ellipsis">
+            {image ? (
+              <img
+                src={image.url}
+                alt="film-images"
+                className="shadow-md shadow-black w-full h-[300px] sm:h-[330px] md:h-[350px] lg:h-[400px] xl:h-[350px] block rounded-md"
+              />
+            ) : (
+              <img
+                src={poster}
+                alt="film-images"
+                className="w-full h-[300px] sm:h-[330px] md:h-[350px] lg:h-[400px] xl:h-[350px] block rounded-md shadow-md"
+              />
+            )}
+            <h2 className="mt-3 text-xl font-bold text-wrap text-ellipsis hover:text-red-800">
               {value.title}
             </h2>
           </div>
         );
       })}
-      {/* <div className="w-[120px] sm:w-[160px] md:w-[200px] lg:w-[240px] inline-block cursor-pointer relative p-1">
-        <img
-          src={banner}
-          alt="demo"
-          className="w-full h-auto block rounded-sm"
-        />
-      </div>
-      <div className="w-[120px] sm:w-[160px] md:w-[200px] lg:w-[240px] inline-block cursor-pointer relative p-1">
-        <img
-          src={slider1}
-          alt="demo"
-          className="w-full h-auto block rounded-sm"
-        />
-      </div>
-      <div className="w-[120px] sm:w-[160px] md:w-[200px] lg:w-[240px] inline-block cursor-pointer relative p-1">
-        <img
-          src={slider2}
-          alt="demo"
-          className="w-full h-auto block rounded-sm"
-        />
-      </div>
-      <div className="w-[120px] sm:w-[160px] md:w-[200px] lg:w-[240px] inline-block cursor-pointer relative p-1">
-        <img
-          src={slider3}
-          alt="demo"
-          className="w-full h-auto block rounded-sm"
-        />
-      </div> */}
+
+    
     </div>
   );
 };
