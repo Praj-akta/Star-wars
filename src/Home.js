@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
-import { useQuery, gql } from "@apollo/client";
 import Film from "./Film";
-import banner from "./images/banner.jpg";
-import slider1 from "./images/slider1.jpg";
-import slider2 from "./images/slider2.jpg";
-import slider3 from "./images/slider3.jpg";
-import aboutImg from "./images/about.jpg";
-
 import Header from "./Header";
+import { slides } from "./data";
+import aboutImg from "./images/about.jpg";
+import { useQuery, gql } from "@apollo/client";
 
 const FILMS_QUERY = gql`
   query Query {
@@ -55,28 +51,48 @@ const FILMS_QUERY = gql`
 `;
 
 function Home() {
-  const slides = [
-    { url: banner },
-    { url: slider1 },
-    { url: slider2 },
-    { url: slider3 },
-  ];
-  const [currentIndex, setCurrentIndex] = useState(1);
   // fetching films data
   const { data, error } = useQuery(FILMS_QUERY);
-  if (error) console.log(error.message);
+  if (error) console.log("error", error.message);
 
+  const [currentIndex, setCurrentIndex] = useState(1);
+  const [selectedSortValue, setSortedValue] = useState("title");
+  const [sortedFilms, setSortedFilms] = useState([]);
+
+  // storing the data in sortedFilms array
+  useEffect(() => {
+    setSortedFilms(data?.allFilms?.films);
+  }, [data]);
+
+  // This useEffect works on autoplaying slider images
   useEffect(() => {
     const autoplay = setInterval(() => {
-      nextSlide();
+      setCurrentIndex((prevIndex) =>
+        prevIndex === slides.length - 1 ? 0 : prevIndex + 1
+      );
     }, 3000);
     return () => clearInterval(autoplay);
   }, [currentIndex]);
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === slides.length - 1 ? 0 : prevIndex + 1
-    );
+  // This will set the selected sorted value
+  useEffect(() => {
+    sortFilms(selectedSortValue);
+  }, [selectedSortValue]);
+
+  const sortFilms = (value) => {
+    const films = [...sortedFilms]; 
+    const sorted = films.sort((a, b) => {
+      if (value === "title") {
+        return a.title.localeCompare(b.title);
+      } else if (value === "releaseDate") {
+        return new Date(a.releaseDate) - new Date(b.releaseDate);
+      } else if (value === "episodeID") {
+        return a.episodeID - b.episodeID;
+      }
+      return 0;
+    });
+
+    setSortedFilms(sorted);
   };
 
   return (
@@ -134,11 +150,23 @@ function Home() {
       </div>
 
       <div id="films">
-        <h1 className="py-2 text-3xl border-b border-b-gray-400 px-4">
-          {" "}
-          Films{" "}
-        </h1>
-        <Film data={data} />
+        <div className="flex justify-between py-2 border-b border-b-gray-400 px-4">
+          <h1 className="text-3xl">Films</h1>
+          <h3>
+            Sort by:
+            <select
+              id="sort"
+              value={selectedSortValue}
+              onChange={(e) => setSortedValue(e.target.value)}
+            >
+              <option value="title">Title</option>
+              <option value="releaseDate">Release Date</option>
+              <option value="episodeID">Episode Number</option>
+            </select>
+          </h3>
+        </div>
+
+        <Film data={sortedFilms} />
       </div>
     </div>
   );

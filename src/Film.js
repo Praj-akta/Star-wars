@@ -1,24 +1,10 @@
 import React from "react";
-import hope from "./images/hope.jpg";
-import jedi from "./images/jedi.jpg";
-import sith from "./images/sith.jpg";
+import { filmImages } from "./data";
 import poster from "./images/poster.jpg";
-import menace from "./images/menace.jpg";
-import clones from "./images/clones.jpg";
-import strikes from "./images/strikes.jpg";
 import { useNavigate } from "react-router-dom";
 
 const Film = ({ data }) => {
   const navigate = useNavigate();
-  const filmImages = [
-    { url: hope, title: "A New Hope" },
-    { url: strikes, title: "The Empire Strikes Back" },
-    { url: jedi, title: "Return of the Jedi" },
-    { url: menace, title: "The Phantom Menace" },
-    { url: clones, title: "Attack of the Clones" },
-    { url: sith, title: "Revenge of the Sith" },
-  ];
-
   const handleImageClick = (filmDetails) => {
     navigate(`/film/${filmDetails.title}`, {
       state: filmDetails
@@ -27,7 +13,7 @@ const Film = ({ data }) => {
 
   return (
     <div className="px-3 py-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-      {data?.allFilms?.films?.map((value, index) => {
+      {data?.map((value, index) => {
         const image = filmImages.find((film) => film.title === value.title);
         return (
           <div
@@ -54,8 +40,6 @@ const Film = ({ data }) => {
           </div>
         );
       })}
-
-    
     </div>
   );
 };
