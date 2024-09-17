@@ -1,4 +1,5 @@
-# Getting Started with Create React App
+# Star-wars
+A Star Wars application using React JS and GraphQL
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
