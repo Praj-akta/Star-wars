@@ -56,8 +56,12 @@ function Home() {
   if (error) console.log("error", error.message);
 
   const [currentIndex, setCurrentIndex] = useState(1);
-  const [selectedSortValue, setSortedValue] = useState("title");
+  const [selectedSortValue, setSortedValue] = useState("releaseDate");
   const [sortedFilms, setSortedFilms] = useState([]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // storing the data in sortedFilms array
   useEffect(() => {
@@ -70,17 +74,13 @@ function Home() {
       setCurrentIndex((prevIndex) =>
         prevIndex === slides.length - 1 ? 0 : prevIndex + 1
       );
-    }, 3000);
+    }, 5000);
     return () => clearInterval(autoplay);
   }, [currentIndex]);
 
-  // This will set the selected sorted value
-  useEffect(() => {
-    sortFilms(selectedSortValue);
-  }, [selectedSortValue]);
-
   const sortFilms = (value) => {
-    const films = [...sortedFilms]; 
+    setSortedValue(value);
+    const films = [...sortedFilms];
     const sorted = films.sort((a, b) => {
       if (value === "title") {
         return a.title.localeCompare(b.title);
@@ -97,12 +97,16 @@ function Home() {
 
   return (
     <div className="relative">
-      <Header />
-      <div
-        style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
-        className="pt-14 w-full h-[350px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px] bg-center bg-cover duration-500"
-      ></div>
-
+      <Header show={true} />
+      <div className="pt-14 w-full h-[350px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px]">
+        <div
+          style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
+          className="relative w-full h-full bg-center bg-cover bg-no-repeat duration-500">
+            <div className="absolute background-overlay w-full h-full">
+                Hello
+            </div>
+        </div>
+      </div>
       <div id="about">
         <h1 className="py-2 text-3xl border-b border-b-gray-400 px-4">
           History
@@ -150,18 +154,18 @@ function Home() {
       </div>
 
       <div id="films">
-        <div className="flex justify-between py-2 border-b border-b-gray-400 px-4">
+        <div className="flex justify-between items-center py-2 border-b border-b-gray-400 px-4 mt-4">
           <h1 className="text-3xl">Films</h1>
           <h3>
             Sort by:
             <select
               id="sort"
               value={selectedSortValue}
-              onChange={(e) => setSortedValue(e.target.value)}
+              onChange={(e) => sortFilms(e.target.value)}
             >
               <option value="title">Title</option>
-              <option value="releaseDate">Release Date</option>
               <option value="episodeID">Episode Number</option>
+              <option value="releaseDate">Release Date</option>
             </select>
           </h3>
         </div>

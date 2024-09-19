@@ -1,4 +1,35 @@
 * {
-    background-color: #1D1E1F;
-    color: white;
+  background-color: #1d1e1f;
+  color: white;
+}
+
+header,
+header .logo img,
+header ul li {
+  background-color: black;
+}
+
+.background-overlay {
+  background: linear-gradient(270deg, #00000000 0%, #0000000A 16%, #00000021 29%, #00000042 41%, #0000006B 51%, #00000094 61%, #000000BD 70%, #000000DE 79%, #000000F5 89%, #000000FF 100%)
+}
+
+.film-details-content {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  gap: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .film-details-content {
+    display: flex;
+    flex-direction: column;
+  }
+  .film-details-content .poster img {
+    width: 500px;
+    margin: 0 auto;
+  }
+  .film-details-content .details {
+    margin-top: 0;
+    padding-top: 0;
+  }
 }
