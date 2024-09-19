@@ -47,8 +47,6 @@ const FilmDetails = () => {
     starshipConnection,
   ]);
 
-  console.log(filmDetails);
-
   return (
     <div className="film-details">
       <Header />

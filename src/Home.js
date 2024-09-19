@@ -4,6 +4,7 @@ import Header from "./Header";
 import Slider from "./Slider";
 import aboutImg from "./images/about.jpg";
 import { useQuery, gql } from "@apollo/client";
+import Footer from "./Footer";
 
 const FILMS_QUERY = gql`
   query Query {
@@ -151,6 +152,8 @@ function Home() {
         </div>
 
         <Film data={sortedFilms} />
+
+        <Footer />
       </div>
     </div>
   );

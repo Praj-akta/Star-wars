@@ -67,3 +67,18 @@ export const tabItems = [
   { name: "Vehicles" },
   { name: "Starships" },
 ];
+
+export const footerItems = {
+  company: [
+    { name: "About" },
+    { name: "Contact" },
+    { name: "Corporate" },
+    { name: "Careers" },
+    { name: "Reviews" },
+  ],
+  needHelp: [
+    { name: "Support" },
+    { name: "Warranty Info" },
+    { name: "FAQ" }
+  ],
+};

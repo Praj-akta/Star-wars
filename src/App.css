@@ -33,3 +33,28 @@ header ul li {
     padding-top: 0;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .slider h1 {
+    padding: 10px;
+    font-size: 23px;
+    width: 10em;
+    line-height: 2rem;
+  }
+  .slider p {
+    width: 16em;
+    font-size: 14px;
+    padding: 10px;
+    line-height: 1.2rem;
+  }
+  .slider .buttons {
+    padding: 10px;
+    width: 17rem;
+  }
+  .slider .buttons a {
+    padding: 7px 12px;
+  }
+  .background-overlay {
+    background: linear-gradient(90deg, #3d3d3d, transparent);
+  }
+}
