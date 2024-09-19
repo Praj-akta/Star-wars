@@ -72,25 +72,25 @@ const FilmDetails = () => {
               <h1 className="font-bold text-3xl text-wrap">
                 Star Wars: {title} (Episode {episodeID})
               </h1>
-              <p className="text-[#b5b7b7] text-md mt-3">
-                <strong className="text-[#b5b7b7]">Rating:</strong> PG - 13
+              <p className="text-[#b5b7b7] text-md pt-2 mt-3">
+                <strong className="text-[#f5f5f5]">Rating:</strong> PG - 13
               </p>
-              <p className="text-[#b5b7b7] text-md">
-                <strong className="text-[#b5b7b7]">Runtime:</strong> 2h 20min
+              <p className="text-[#b5b7b7] text-md pt-2">
+                <strong className="text-[#f5f5f5]">Runtime:</strong> 2h 20min
               </p>
-              <p className="text-[#b5b7b7] text-md">
-                <strong className="text-[#b5b7b7]">Release Date:</strong>
+              <p className="text-[#b5b7b7] text-md pt-2">
+                <strong className="text-[#f5f5f5]">Release Date: </strong>
                 {modifiedDate}
               </p>
-              <p className="text-[#b5b7b7] text-md">
-                <strong className="text-[#b5b7b7]">Director:</strong> {director}
+              <p className="text-[#b5b7b7] text-md pt-2">
+                <strong className="text-[#f5f5f5]">Director:</strong> {director}
               </p>
-              <p className="text-[#b5b7b7] text-md">
-                <strong className="text-[#b5b7b7]">Producers:</strong>
+              <p className="text-[#b5b7b7] text-md pt-2">
+                <strong className="text-[#f5f5f5]">Producers: </strong>
                 {producers.join(", ")}
               </p>
-              <p className="text-[#b5b7b7] text-md">
-                <strong className="text-[#b5b7b7]">Relatable article:</strong>
+              <p className="text-[#b5b7b7] text-md pt-2">
+                <strong className="text-[#f5f5f5]">Relatable article:</strong>
                 <a
                   href={articleLink}
                   target="_blank"
@@ -99,7 +99,7 @@ const FilmDetails = () => {
                   {articleLink}
                 </a>
               </p>
-              <p className="text-[#b5b7b7] text-lg mt-3">{openingCrawl}</p>
+              <p className="text-[#b5b7b7] text-lg mt-5">{openingCrawl}</p>
               <div className="pt-5 pb-2 text-xl border-b border-b-gray-400">
                 Databank: {title}
               </div>
