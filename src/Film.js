@@ -36,13 +36,13 @@ const Film = ({ data }) => {
               <img
                 src={image.url}
                 alt="film-images"
-                className="shadow-md shadow-black w-full h-[300px] sm:h-[330px] md:h-[350px] lg:h-[400px] xl:h-[350px] block rounded-md"
+                className="shadow-md shadow-black w-full h-[260px] sm:h-[330px] md:h-[350px] lg:h-[400px] xl:h-[350px] block rounded-md"
               />
             ) : (
               <img
                 src={poster}
                 alt="film-images"
-                className="w-full h-[300px] sm:h-[330px] md:h-[350px] lg:h-[400px] xl:h-[350px] block rounded-md shadow-md"
+                className="w-full h-[260px] sm:h-[330px] md:h-[350px] lg:h-[400px] xl:h-[350px] block rounded-md shadow-md"
               />
             )}
             <h2 className="mt-3 text-xl font-bold text-wrap text-ellipsis hover:text-red-800">
