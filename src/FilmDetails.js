@@ -89,8 +89,8 @@ const FilmDetails = () => {
                 <strong className="text-[#f5f5f5]">Producers: </strong>
                 {producers.join(", ")}
               </p>
-              <p className="text-[#b5b7b7] text-md pt-2">
-                <strong className="text-[#f5f5f5]">Relatable article:</strong>
+              <p className="text-[#b5b7b7] text-md pt-2 break-words">
+                <strong className="text-[#f5f5f5]">Article: </strong>
                 <a
                   href={articleLink}
                   target="_blank"
