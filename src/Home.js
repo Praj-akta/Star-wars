@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Film from "./Film";
 import Header from "./Header";
-import { slides } from "./data";
+import Slider from "./Slider";
 import aboutImg from "./images/about.jpg";
 import { useQuery, gql } from "@apollo/client";
 
@@ -54,8 +54,6 @@ function Home() {
   // fetching films data
   const { data, error } = useQuery(FILMS_QUERY);
   if (error) console.log("error", error.message);
-
-  const [currentIndex, setCurrentIndex] = useState(1);
   const [selectedSortValue, setSortedValue] = useState("releaseDate");
   const [sortedFilms, setSortedFilms] = useState([]);
 
@@ -67,16 +65,6 @@ function Home() {
   useEffect(() => {
     setSortedFilms(data?.allFilms?.films);
   }, [data]);
-
-  // This useEffect works on autoplaying slider images
-  useEffect(() => {
-    const autoplay = setInterval(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === slides.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 5000);
-    return () => clearInterval(autoplay);
-  }, [currentIndex]);
 
   const sortFilms = (value) => {
     setSortedValue(value);
@@ -98,15 +86,8 @@ function Home() {
   return (
     <div className="relative">
       <Header show={true} />
-      <div className="pt-14 w-full h-[350px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px]">
-        <div
-          style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
-          className="relative w-full h-full bg-center bg-cover bg-no-repeat duration-500">
-            <div className="absolute background-overlay w-full h-full">
-                Hello
-            </div>
-        </div>
-      </div>
+      <Slider  />
+
       <div id="about">
         <h1 className="py-2 text-3xl border-b border-b-gray-400 px-4">
           History
@@ -161,8 +142,7 @@ function Home() {
             <select
               id="sort"
               value={selectedSortValue}
-              onChange={(e) => sortFilms(e.target.value)}
-            >
+              onChange={(e) => sortFilms(e.target.value)}>
               <option value="title">Title</option>
               <option value="episodeID">Episode Number</option>
               <option value="releaseDate">Release Date</option>

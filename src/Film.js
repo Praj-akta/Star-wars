@@ -30,7 +30,7 @@ const Film = ({ data }) => {
         return (
           <div
             key={index}
-            className="cursor-pointer relative p-1 mt-3"
+            className="cursor-pointer p-1 mt-3"
             onClick={() => handleImageClick({...value, ...image, modifiedDate})}>
             {image ? (
               <img
